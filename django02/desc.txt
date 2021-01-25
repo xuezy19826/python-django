@@ -1,0 +1,8 @@
+参考地址：https://docs.djangoproject.com/zh-hans/2.0/#index-first-steps
+
+-- 创建管理员账号指令
+python manage.py createsuperuser
+
+-- 管理端地址、用户名和密码
+http://127.0.0.1:82/admin/
+admin/123456   test@qq.com
