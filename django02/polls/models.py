@@ -16,7 +16,12 @@ class Question(models.Model):
 
     # 自定义方法：计算时间差
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    was_published_recently.admin_order_field = 'pub_date'
+    was_published_recently.boolean = True
+    was_published_recently.short_description = 'Published recently?'
 
 
 class Choice(models.Model):
@@ -24,7 +29,7 @@ class Choice(models.Model):
     # 问题
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     # 选项描述
-    choice_text = models.FileField(max_length=200)
+    choice_text = models.CharField(max_length=200)
     # 得票数
     votes = models.IntegerField(default=0)
 
